@@ -8,14 +8,16 @@ import {
   TextInput,
 } from 'react-native-paper';
 import {theme} from '../theme';
+import {useNavigation} from '@react-navigation/native';
 
 const PostEditorScreen = () => {
+  const navigate = useNavigation();
   const [text, setText] = React.useState('');
   const [journalText, setJournalText] = React.useState('');
   return (
     <View style={{backgroundColor: theme.colors.primary, flex: 1}}>
       <Appbar.Header style={{backgroundColor: theme.colors.primary}}>
-        <Appbar.BackAction onPress={() => {}} />
+        <Appbar.BackAction onPress={() => navigate.goBack()} />
         <Appbar.Content title="Title" />
       </Appbar.Header>
       <View style={styles.dateView}>
