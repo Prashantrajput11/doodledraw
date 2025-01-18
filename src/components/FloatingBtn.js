@@ -6,6 +6,8 @@ import {useNavigation} from '@react-navigation/native';
 
 const FloatingBtn = () => {
   const navigation = useNavigation();
+
+  console.log('inside flaoting btn');
   return (
     <View>
       <IconButton
@@ -19,6 +21,6 @@ const FloatingBtn = () => {
   );
 };
 
-export default React.memo(FloatingBtn);
+export default FloatingBtn;
 
 const styles = StyleSheet.create({});
