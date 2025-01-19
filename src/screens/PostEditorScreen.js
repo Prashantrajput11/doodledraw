@@ -1,5 +1,5 @@
 import {Alert, Pressable, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   ActivityIndicator,
   Appbar,
@@ -46,6 +46,12 @@ const PostEditorScreen = () => {
 
     Alert.alert('journal succesfully added');
   };
+  console.log('parent rerenderd');
+
+  const handleEmojiSelect = useCallback(emoji => {
+    setSelectedEmoji(emoji);
+    setShowEmojiPicker(false);
+  }, []);
 
   return (
     <View style={{backgroundColor: theme.colors.primary, flex: 1}}>
@@ -92,14 +98,7 @@ const PostEditorScreen = () => {
         style={{backgroundColor: theme.colors.primary}}
       />
 
-      {showEmojiPicker && (
-        <EmojiPicker
-          onEmojiSelect={emoji => {
-            setSelectedEmoji(emoji);
-            setShowEmojiPicker(false);
-          }}
-        />
-      )}
+      {showEmojiPicker && <EmojiPicker onEmojiSelect={handleEmojiSelect} />}
     </View>
   );
 };

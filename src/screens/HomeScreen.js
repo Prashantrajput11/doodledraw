@@ -8,7 +8,6 @@ import useJournalStore from '../store/useJournalStore';
 const HomeScreen = () => {
   const journals = useJournalStore(state => state.journals);
 
-  console.log('journals', journals);
   // console.log('remove:', removeAllJournals);
   const renderItem = useCallback(({item}) => {
     return <JournalCard journalData={item} />;

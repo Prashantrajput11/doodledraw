@@ -6,8 +6,6 @@ import useJournalStore from '../store/useJournalStore';
 import {useNavigation} from '@react-navigation/native';
 
 const JournalCard = ({journalData}) => {
-  console.log('jd', journalData);
-
   const {id, title, journalText, journalDate} = journalData;
 
   const navigation = useNavigation();

@@ -3,18 +3,30 @@ import React, {useCallback, useState} from 'react';
 import {emojis} from '../constant';
 
 const EmojiPicker = ({onEmojiSelect}) => {
-  const renderEmoji = useCallback(
-    ({item}) => {
-      return (
-        <Pressable
-          style={styles.emojiView}
-          onPress={() => onEmojiSelect(item.emoji)}>
-          <Text style={styles.emoji}>{item.emoji}</Text>
-        </Pressable>
-      );
-    },
-    [onEmojiSelect],
-  );
+  console.log(' childrendered');
+
+  // const renderEmoji = useCallback(
+  //   ({item}) => {
+  //     return (
+  //       <Pressable
+  //         style={styles.emojiView}
+  //         onPress={() => onEmojiSelect(item.emoji)}>
+  //         <Text style={styles.emoji}>{item.emoji}</Text>
+  //       </Pressable>
+  //     );
+  //   },
+  //   [onEmojiSelect],
+  // );
+
+  const renderEmoji = ({item}) => {
+    return (
+      <Pressable
+        style={styles.emojiView}
+        onPress={() => onEmojiSelect(item.emoji)}>
+        <Text style={styles.emoji}>{item.emoji}</Text>
+      </Pressable>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -31,7 +43,9 @@ const EmojiPicker = ({onEmojiSelect}) => {
   );
 };
 
-export default EmojiPicker;
+// export default EmojiPicker;
+
+export default React.memo(EmojiPicker);
 
 const styles = StyleSheet.create({
   container: {
