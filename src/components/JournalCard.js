@@ -1,16 +1,52 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {theme} from '../theme';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import useJournalStore from '../store/useJournalStore';
+import {useNavigation} from '@react-navigation/native';
 
-const JournalCard = ({title, journalText, journalDate}) => {
+const JournalCard = ({journalData}) => {
+  console.log('jd', journalData);
+
+  const {id, title, journalText, journalDate} = journalData;
+
+  const navigation = useNavigation();
+  const deleteJournal = useJournalStore(state => state.deleteJournal);
+
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Journal', // Title
+      'Are you sure you want to delete this journal? This action cannot be undone.', // Message
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          onPress: () => {
+            deleteJournal(id);
+            Alert.alert('Journal deleted successfully');
+          },
+          style: 'destructive', // This will make the button red on iOS
+        },
+      ],
+      {cancelable: true}, // Allows dismissing the alert by tapping outside
+    );
+  };
   return (
-    <View style={styles.cardContainer}>
+    <Pressable
+      style={styles.cardContainer}
+      onPress={() => navigation.navigate('JournalDetails', {journalData})}>
       <Text style={styles.titleText}>{title}</Text>
       <Text style={styles.journalText}>{journalText}</Text>
       <Text style={styles.dateText}>{journalDate}</Text>
 
+      <Pressable style={styles.trash} onPress={handleDelete}>
+        <Icon name="trash" size={20} color={theme.colors.secondary} />
+      </Pressable>
       {/* <View style={styles.separatorLine} /> */}
-    </View>
+    </Pressable>
   );
 };
 
@@ -53,5 +89,19 @@ const styles = StyleSheet.create({
     height: 4, // Thickness of the line
     backgroundColor: '#333', // Dark color for contrast
     borderRadius: 2, // Slightly rounded edges for a modern look
+  },
+
+  trash: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+    backgroundColor: '#fff',
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    // padding: 20,
   },
 });

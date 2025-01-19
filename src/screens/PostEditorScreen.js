@@ -14,15 +14,21 @@ import useJournalStore from '../store/useJournalStore';
 const PostEditorScreen = () => {
   const navigate = useNavigation();
 
+  // zustand hook to get addJournal action
   const addJournal = useJournalStore(state => state.addJournal);
+
+  // init local states
   const [text, setText] = React.useState('');
   const [journalText, setJournalText] = React.useState('');
 
   const handleJournalSave = () => {
+    // journal text and description validation
     if (!text.trim() || !journalText.trim()) {
       Alert.alert('Please fill both title and journal text');
       return;
     }
+
+    // new journal object
     const newJournal = {
       title: text,
       date: '23 june',
@@ -32,8 +38,6 @@ const PostEditorScreen = () => {
     addJournal(newJournal);
 
     Alert.alert('journal succesfully added');
-
-    // setJournalList([newJournal, ...journalList]);
   };
   return (
     <View style={{backgroundColor: theme.colors.primary, flex: 1}}>

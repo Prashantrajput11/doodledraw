@@ -7,6 +7,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PostEditorScreen from './src/screens/PostEditorScreen';
+import JournalDetails from './src/screens/JournalDetails';
 // import Icon from '@react-native-vector-icons/feather';
 
 const RootStack = createNativeStackNavigator({
@@ -17,6 +18,7 @@ const RootStack = createNativeStackNavigator({
   screens: {
     Home: HomeScreen,
     PostEditor: PostEditorScreen,
+    JournalDetails: JournalDetails,
   },
 });
 

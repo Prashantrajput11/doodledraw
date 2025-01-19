@@ -11,13 +11,7 @@ const HomeScreen = () => {
   console.log('journals', journals);
   // console.log('remove:', removeAllJournals);
   const renderItem = useCallback(({item}) => {
-    return (
-      <JournalCard
-        title={item.title}
-        journalText={item.journalText}
-        journalDate={item.date}
-      />
-    );
+    return <JournalCard journalData={item} />;
   }, []);
 
   return (
