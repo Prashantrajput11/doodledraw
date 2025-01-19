@@ -1,4 +1,4 @@
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {Alert, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {
   ActivityIndicator,
@@ -10,6 +10,8 @@ import {
 import {theme} from '../theme';
 import {useNavigation} from '@react-navigation/native';
 import useJournalStore from '../store/useJournalStore';
+import {Subheader} from 'react-native-paper/lib/typescript/components/List/List';
+import EmojiPicker from '../components/EmojiPicker';
 
 const PostEditorScreen = () => {
   const navigate = useNavigation();
@@ -20,6 +22,11 @@ const PostEditorScreen = () => {
   // init local states
   const [text, setText] = React.useState('');
   const [journalText, setJournalText] = React.useState('');
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [selectedEmoji, setSelectedEmoji] = useState('😄');
+
+  // Functions
+  const toggleEmojiPicker = () => setShowEmojiPicker(!showEmojiPicker);
 
   const handleJournalSave = () => {
     // journal text and description validation
@@ -39,6 +46,7 @@ const PostEditorScreen = () => {
 
     Alert.alert('journal succesfully added');
   };
+
   return (
     <View style={{backgroundColor: theme.colors.primary, flex: 1}}>
       <Appbar.Header style={{backgroundColor: theme.colors.primary}}>
@@ -52,10 +60,15 @@ const PostEditorScreen = () => {
           Save
         </Button>
       </Appbar.Header>
+      <View style={styles.subHeader}>
+        <View style={styles.dateView}>
+          <Text style={styles.day}>16</Text>
+          <Text style={styles.month}>Jan, 2025</Text>
+        </View>
 
-      <View style={styles.dateView}>
-        <Text style={styles.day}>16</Text>
-        <Text style={styles.month}>Jan, 2025</Text>
+        <Pressable style={styles.emojiView} onPress={toggleEmojiPicker}>
+          <Text style={styles.emojiText}>{selectedEmoji}</Text>
+        </Pressable>
       </View>
 
       <TextInput
@@ -78,6 +91,15 @@ const PostEditorScreen = () => {
         cursorColor={theme.colors.secondary}
         style={{backgroundColor: theme.colors.primary}}
       />
+
+      {showEmojiPicker && (
+        <EmojiPicker
+          onEmojiSelect={emoji => {
+            setSelectedEmoji(emoji);
+            setShowEmojiPicker(false);
+          }}
+        />
+      )}
     </View>
   );
 };
@@ -96,5 +118,23 @@ const styles = StyleSheet.create({
   day: {
     fontSize: 22,
     fontWeight: 'bold',
+  },
+  subHeader: {
+    backgroundColor: theme.colors.primary,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // marginHorizontal: 8,
+  },
+  emojiText: {
+    fontSize: 24,
+  },
+  emojiView: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 16,
   },
 });

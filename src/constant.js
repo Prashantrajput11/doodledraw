@@ -105,3 +105,18 @@ export const dummyJournals = [
     date: '15 Jan',
   },
 ];
+
+export const emojis = [
+  {id: 1, emoji: '😄', description: 'Happy'},
+  {id: 2, emoji: '😃', description: 'Grinning'},
+  {id: 3, emoji: '😀', description: 'Beaming'},
+  {id: 4, emoji: '😊', description: 'Smiling'},
+  {id: 5, emoji: '😉', description: 'Winking'},
+  {id: 6, emoji: '😍', description: 'Heart Eyes'},
+  {id: 7, emoji: '😘', description: 'Kissing Heart'},
+  {id: 8, emoji: '😚', description: 'Kissing Closed Eyes'},
+  {id: 9, emoji: '😳', description: 'Flushed'},
+  {id: 10, emoji: '😔', description: 'Pensive'},
+  {id: 11, emoji: '😡', description: 'Angry'},
+  {id: 12, emoji: '😡', description: 'Angry'},
+];
